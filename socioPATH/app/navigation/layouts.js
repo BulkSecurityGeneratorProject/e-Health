@@ -14,6 +14,7 @@ import LaunchScreen from '../modules/home/launch-screen'
 import DrawerContent from './drawer/drawer-content'
 import SettingsScreen from '../modules/account/settings/settings-screen'
 import ChestionarScreen from '../modules/account/chestionar/chestionar-screen'
+import ObiectiveScreen from '../modules/account/obiective/obiective-screen'
 import RegisterScreen from '../modules/account/register/register-screen'
 import ForgotPasswordScreen from '../modules/account/password-reset/forgot-password-screen'
 import ChangePasswordScreen from '../modules/account/password/change-password-screen'
@@ -22,6 +23,7 @@ import EntitiesScreen from '../modules/entities/entities-screen'
 
 export const LOGIN_SCREEN = 'nav.LoginScreen'
 export const REGISTER_SCREEN = 'nav.RegisterScreen'
+export const OBIECTIVE_SCREEN = 'nav.ObiectiveScreen'
 export const FORGOT_PASSWORD_SCREEN = 'nav.ForgotPasswordScreen'
 export const CHANGE_PASSWORD_SCREEN = 'nav.ChangePasswordScreen'
 export const SETTINGS_SCREEN = 'nav.SettingsScreen'
@@ -105,6 +107,7 @@ function handleOpenURL (event) {
 
 export function registerScreensAndStartApp () {
   Navigation.registerComponentWithRedux(LOGIN_SCREEN, () => LoginScreen, Provider, store)
+  Navigation.registerComponentWithRedux(OBIECTIVE_SCREEN, () => ObiectiveScreen, Provider, store)
   Navigation.registerComponentWithRedux(CHESTIONAR_SCREEN, () => ChestionarScreen, Provider, store)
   Navigation.registerComponentWithRedux(REGISTER_SCREEN, () => RegisterScreen, Provider, store)
   Navigation.registerComponentWithRedux(FORGOT_PASSWORD_SCREEN, () => ForgotPasswordScreen, Provider, store)
@@ -172,6 +175,20 @@ export const registerScreen = () => Navigation.push('center', {
       topBar: {
         title: {
           text: 'Sign Up',
+          color: Colors.snow
+        }
+      }
+    }
+  }
+})
+
+export const obiectiveScreen = () => Navigation.push('center', {
+  component: {
+    name: OBIECTIVE_SCREEN,
+    options: {
+      topBar: {
+        title: {
+          text: 'Obiective',
           color: Colors.snow
         }
       }
