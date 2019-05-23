@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Navigation } from 'react-native-navigation'
 import t from 'tcomb-form-native'
-import styles from './settings-screen.styles'
+import styles from './chestionar-screen.styles'
 
 import ChestionarSendActions from '../chestionar/chestionar.reducer'
 
