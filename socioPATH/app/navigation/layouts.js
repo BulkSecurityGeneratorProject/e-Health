@@ -105,6 +105,7 @@ function handleOpenURL (event) {
 
 export function registerScreensAndStartApp () {
   Navigation.registerComponentWithRedux(LOGIN_SCREEN, () => LoginScreen, Provider, store)
+  Navigation.registerComponentWithRedux(CHESTIONAR_SCREEN, () => ChestionarScreen, Provider, store)
   Navigation.registerComponentWithRedux(REGISTER_SCREEN, () => RegisterScreen, Provider, store)
   Navigation.registerComponentWithRedux(FORGOT_PASSWORD_SCREEN, () => ForgotPasswordScreen, Provider, store)
   Navigation.registerComponentWithRedux(CHANGE_PASSWORD_SCREEN, () => ChangePasswordScreen, Provider, store)
