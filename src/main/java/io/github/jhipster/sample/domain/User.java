@@ -100,6 +100,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
 
+    @OneToMany(mappedBy = "userId")
+    @JsonIgnore
+    private Set<Score> scores = new HashSet<>();
+
+
     public Long getId() {
         return id;
     }
@@ -219,6 +224,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public Set<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(Set<Score> scores) {
+        this.scores = scores;
     }
 
     @Override

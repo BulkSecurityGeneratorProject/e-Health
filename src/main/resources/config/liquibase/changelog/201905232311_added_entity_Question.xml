@@ -15,7 +15,7 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity Label.
+        Added the entity Question.
     -->
     <changeSet id="201905232311" author="adrian">
         <createTable tableName="question">
