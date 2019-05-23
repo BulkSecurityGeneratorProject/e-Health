@@ -1,6 +1,7 @@
 package io.github.jhipster.sample.web.rest;
 
-import io.github.jhipster.sample.service.QuoteService;
+import io.github.jhipster.sample.service.QuestionService;
+import io.github.jhipster.sample.service.dto.QuestionDTO;
 import io.github.jhipster.sample.service.dto.QuoteDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,18 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/quote")
-public class QuoteController {
+@RequestMapping("/question")
+public class QuestionController {
 
-    private final Logger log = LoggerFactory.getLogger(QuoteController.class);
+    private final Logger log = LoggerFactory.getLogger(QuestionController.class);
 
     @Autowired
-    private QuoteService quoteService;
+    private QuestionService questionService;
 
-    @GetMapping("/getRandomQuote")
-    public ResponseEntity<QuoteDTO> getRandomQuote() {
-        log.debug("Retrieve random quote!");
-        return new ResponseEntity<>(quoteService.retrieveRandomQuote(),
+    @GetMapping("/getAllQuestions")
+    public ResponseEntity<QuestionDTO> retrieveAllQuestions() {
+        log.debug("Retrieve all questions!");
+        return new ResponseEntity<>(questionService.retrieveAllQuestions(),
             HttpStatus.OK);
     }
+
 }
