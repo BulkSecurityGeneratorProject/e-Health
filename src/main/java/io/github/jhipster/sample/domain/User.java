@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -100,7 +101,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
 
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "userId", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Score> scores = new HashSet<>();
 

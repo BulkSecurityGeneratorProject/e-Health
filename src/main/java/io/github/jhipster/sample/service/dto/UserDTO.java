@@ -3,6 +3,7 @@ package io.github.jhipster.sample.service.dto;
 import io.github.jhipster.sample.config.Constants;
 
 import io.github.jhipster.sample.domain.Authority;
+import io.github.jhipster.sample.domain.Score;
 import io.github.jhipster.sample.domain.User;
 
 import org.hibernate.validator.constraints.Email;
@@ -10,6 +11,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.*;
 import java.time.Instant;
+import java.util.Comparator;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -57,6 +60,8 @@ public class UserDTO {
 
     private Long age;
 
+    private Long score;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -79,6 +84,8 @@ public class UserDTO {
             .collect(Collectors.toSet());
         this.sex = user.getSex();
         this.age = user.getAge();
+        this.score = user.getScores().stream().max(Comparator.comparing(Score::getCreatedDate))
+            .orElseThrow(NoSuchElementException::new).getScore();
     }
 
     public Long getId() {
@@ -201,6 +208,14 @@ public class UserDTO {
         this.age = age;
     }
 
+    public Long getScore() {
+        return score;
+    }
+
+    public void setScore(Long score) {
+        this.score = score;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -219,6 +234,7 @@ public class UserDTO {
             ", authorities=" + authorities +
             ", sex='" + sex + '\'' +
             ", age=" + age +
+            ", score=" + score +
             '}';
     }
 }

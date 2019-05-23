@@ -17,7 +17,8 @@ public class Score implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="USER_ID")
     private User userId;
 
     @CreatedDate
