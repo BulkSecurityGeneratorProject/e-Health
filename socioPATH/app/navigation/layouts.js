@@ -13,6 +13,7 @@ import LoginScreen from '../modules/login/login-screen'
 import LaunchScreen from '../modules/home/launch-screen'
 import DrawerContent from './drawer/drawer-content'
 import SettingsScreen from '../modules/account/settings/settings-screen'
+import ChestionarScreen from '../modules/account/chestionar/chestionar-screen'
 import RegisterScreen from '../modules/account/register/register-screen'
 import ForgotPasswordScreen from '../modules/account/password-reset/forgot-password-screen'
 import ChangePasswordScreen from '../modules/account/password/change-password-screen'
@@ -24,6 +25,7 @@ export const REGISTER_SCREEN = 'nav.RegisterScreen'
 export const FORGOT_PASSWORD_SCREEN = 'nav.ForgotPasswordScreen'
 export const CHANGE_PASSWORD_SCREEN = 'nav.ChangePasswordScreen'
 export const SETTINGS_SCREEN = 'nav.SettingsScreen'
+export const CHESTIONAR_SCREEN = 'nav.ChestionarScreen'
 export const LAUNCH_SCREEN = 'nav.LaunchScreen'
 export const DRAWER_CONTENT = 'nav.DrawerContent'
 export const ENTITIES_SCREEN = 'nav.EntitiesScreen'
@@ -103,6 +105,7 @@ function handleOpenURL (event) {
 
 export function registerScreensAndStartApp () {
   Navigation.registerComponentWithRedux(LOGIN_SCREEN, () => LoginScreen, Provider, store)
+  Navigation.registerComponentWithRedux(CHESTIONAR_SCREEN, () => ChestionarScreen, Provider, store)
   Navigation.registerComponentWithRedux(REGISTER_SCREEN, () => RegisterScreen, Provider, store)
   Navigation.registerComponentWithRedux(FORGOT_PASSWORD_SCREEN, () => ForgotPasswordScreen, Provider, store)
   Navigation.registerComponentWithRedux(CHANGE_PASSWORD_SCREEN, () => ChangePasswordScreen, Provider, store)
@@ -208,7 +211,20 @@ export const settingsScreen = () => Navigation.push('center', {
     options: {
       topBar: {
         title: {
-          text: 'Settings',
+          text: 'Profil',
+          color: Colors.snow
+        }
+      }
+    }
+  }
+})
+export const chestionarScreen = () => Navigation.push('center', {
+  component: {
+    name: CHESTIONAR_SCREEN,
+    options: {
+      topBar: {
+        title: {
+          text: 'Chestionar',
           color: Colors.snow
         }
       }

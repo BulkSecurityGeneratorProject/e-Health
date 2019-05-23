@@ -8,8 +8,15 @@ import styles from './launch-screen.styles'
 export default class LaunchScreen extends React.Component {
   constructor (props) {
     super(props)
-    Navigation.events().bindComponent(this)
+
+    this.state={
+               message:'hello world',
+               text: '',
+               author: ''
+         };
+       Navigation.events().bindComponent(this)
   }
+
   componentDidAppear () {
     Navigation.mergeOptions(this.props.componentId, {
       sideMenu: {
@@ -20,6 +27,7 @@ export default class LaunchScreen extends React.Component {
       }
     })
   }
+
   showSideMenu () {
     Navigation.mergeOptions(this.props.componentId, {
       sideMenu: {
@@ -34,19 +42,36 @@ export default class LaunchScreen extends React.Component {
     this.showSideMenu()
   }
 
+  componentWillMount(){
+      fetch('http://192.168.0.100:8080/quote/getRandomQuote')
+          .then((response) => response.json())
+          .then((responseJson) => {
+
+              this.setState({
+                         text:responseJson.text,
+                         author:responseJson.author
+                   });
+
+            //return responseJson.tex;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+  }
+
   render () {
     return (
       <View style={styles.mainContainer} testID='launchScreen'>
         <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
         <ScrollView style={styles.container}>
-          <View style={styles.centered}>
-            <Image source={Images.logoJhipster} style={styles.logo} />
-          </View>
-
           <View style={styles.section} >
-            <Image source={Images.ready} />
             <Text style={styles.sectionText}>
-              {'Welcome to your Ignite JHipster app.'}
+              Citat: {this.state.text}
+            </Text>
+
+            <Text style={styles.sectionText}>
+              Autor: {this.state.author}
             </Text>
           </View>
 

@@ -17,6 +17,8 @@ class SettingsScreen extends React.Component {
       accountModel: t.struct({
         firstName: t.maybe(t.String),
         lastName: t.maybe(t.String),
+        age: t.maybe(t.Number),
+        sex: t.maybe(t.String),
         login: t.String,
         email: t.maybe(t.String),
         langKey: t.String,
@@ -33,12 +35,24 @@ class SettingsScreen extends React.Component {
           lastName: {
             returnKeyType: 'next',
             testID: 'lastNameInput',
-            onSubmitEditing: () => this.refs.form.getComponent('email').refs.input.focus()
+            onSubmitEditing: () => this.refs.form.getComponent('age').refs.input.focus()
           },
-          login: {
-            hidden: true
+
+           age: {
+            returnKeyType: 'next',
+            testID: 'ageInput',
+            onSubmitEditing: () => this.refs.form.getComponent('sex').refs.input.focus()
           },
-          email: {
+           sex: {
+              returnKeyType: 'next',
+              testID: 'sexInput',
+              onSubmitEditing: () => this.refs.form.getComponent('email').refs.input.focus()
+            },
+
+            login: {
+              hidden: true
+            },
+           email: {
             returnKeyType: 'done',
             testID: 'emailInput',
             onSubmitEditing: () => this.submitUpdate()
