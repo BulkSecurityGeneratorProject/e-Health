@@ -22,7 +22,8 @@ class SettingsScreen extends React.Component {
         login: t.String,
         email: t.maybe(t.String),
         langKey: t.String,
-        activated: t.Boolean
+        activated: t.Boolean,
+        score: t.maybe(t.Number)
       }),
       accountValue: this.props.account,
       options: {
@@ -48,6 +49,10 @@ class SettingsScreen extends React.Component {
               testID: 'sexInput',
               onSubmitEditing: () => this.refs.form.getComponent('email').refs.input.focus()
             },
+          score: {
+            returnKeyType: 'next',
+            testID: 'scoreInput'
+          },
 
             login: {
               hidden: true

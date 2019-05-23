@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -99,6 +100,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+    @OneToMany(mappedBy = "userId", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<Score> scores = new HashSet<>();
+
 
     public Long getId() {
         return id;
@@ -219,6 +225,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public Set<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(Set<Score> scores) {
+        this.scores = scores;
     }
 
     @Override
