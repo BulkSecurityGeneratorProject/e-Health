@@ -4,47 +4,31 @@ import { connect } from 'react-redux'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Navigation } from 'react-native-navigation'
 import t from 'tcomb-form-native'
-import styles from './chestionar-screen.styles'
+import styles from './obiective-screen.styles'
 
-import ChestionarSendActions from '../chestionar/chestionar.reducer'
+//import ObiectiveSendActions from '../obiective/obiective.reducer'
 
 
 let Form = t.form.Form
 
-class ChestionarScreen extends React.Component {
+class ObiectiveScreen extends React.Component {
   constructor (props) {
     super(props)
     Navigation.events().bindComponent(this)
     this.state = {
-      scor_ezitare: 0,
-      scor_frica: 0,
-      questions: []
+
     }
   }
 
 
-   componentWillMount(){
-        fetch('http://192.168.0.100:8080/question/getAllQuestions')
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                           questions:responseJson.questions,
-                     });
 
-              //return responseJson.tex;
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-
-    }
 
   render () {
     return (
       <KeyboardAwareScrollView>
         <ScrollView style={styles.container}>
 
-           <Text>"chestionar screen"</Text>
+           <Text>"obiective screen"</Text>
         </ScrollView>
       </KeyboardAwareScrollView>
     )
@@ -64,4 +48,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChestionarScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(ObiectiveScreen)

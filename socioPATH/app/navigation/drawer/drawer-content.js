@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { ScrollView, Image, BackHandler } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 
-import { chestionarScreen, loginScreen, registerScreen, forgotPasswordScreen, changePasswordScreen, settingsScreen, entitiesScreen } from '../layouts'
+import { obiectiveScreen, chestionarScreen, loginScreen, registerScreen, forgotPasswordScreen, changePasswordScreen, settingsScreen, entitiesScreen } from '../layouts'
 import { connect } from 'react-redux'
 
 import styles from './drawer-content.styles'
@@ -63,6 +63,11 @@ class DrawerContent extends Component {
     this.hideSideMenu()
     chestionarScreen()
  }
+
+  handlePressObiective = () => {
+     this.hideSideMenu()
+     obiectiveScreen()
+  }
   handlePressLogout = () => {
     this.hideSideMenu()
     this.props.logout()
