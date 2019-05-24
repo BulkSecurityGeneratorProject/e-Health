@@ -262,4 +262,5 @@ export const entitiesScreen = () => Navigation.push('center', {
     }
   }
 })
+
 // ignite-jhipster-navigation-method-needle

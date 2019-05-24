@@ -34,6 +34,22 @@ const ApplicationStyles = {
       marginVertical: Metrics.smallMargin,
       textAlign: 'center'
     },
+    sectionTextA: {
+      ...Fonts.style.h2,
+      paddingVertical: 50,
+      color: Colors.snow,
+      marginVertical: Metrics.smallMargin,
+      textAlign: 'center',
+      textAlignVertical: 'center'
+    },
+    sectionTextB: {
+      ...Fonts.style.h2,
+      paddingVertical: 50,
+      color: Colors.facebook,
+      marginVertical: Metrics.doubleBaseMargin,
+      textAlign: 'center',
+      textAlignVertical: 'center'
+    },
     subtitle: {
       color: Colors.snow,
       padding: Metrics.smallMargin,

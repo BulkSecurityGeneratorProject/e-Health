@@ -1,23 +1,23 @@
 import React from 'react'
-import { ScrollView, Text, Image, View } from 'react-native'
-import { Navigation } from 'react-native-navigation'
+import {ScrollView, Text, Image, View} from 'react-native'
+import {Navigation} from 'react-native-navigation'
 
-import { Images } from '../../shared/themes'
+import {Images} from '../../shared/themes'
 import styles from './launch-screen.styles'
 
 export default class LaunchScreen extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
-    this.state={
-               message:'hello world',
-               text: '',
-               author: ''
-         };
-       Navigation.events().bindComponent(this)
+    this.state = {
+      message: 'hello world',
+      text: '',
+      author: ''
+    };
+    Navigation.events().bindComponent(this)
   }
 
-  componentDidAppear () {
+  componentDidAppear() {
     Navigation.mergeOptions(this.props.componentId, {
       sideMenu: {
         left: {
@@ -28,7 +28,7 @@ export default class LaunchScreen extends React.Component {
     })
   }
 
-  showSideMenu () {
+  showSideMenu() {
     Navigation.mergeOptions(this.props.componentId, {
       sideMenu: {
         left: {
@@ -38,40 +38,39 @@ export default class LaunchScreen extends React.Component {
     })
   }
 
-  navigationButtonPressed ({ buttonId }) {
+  navigationButtonPressed({buttonId}) {
     this.showSideMenu()
   }
 
-  componentWillMount(){
-      fetch('http://192.168.0.100:8080/quote/getRandomQuote')
-          .then((response) => response.json())
-          .then((responseJson) => {
+  componentWillMount() {
+    fetch('http://192.168.0.186:8080/quote/getRandomQuote')
+      .then((response) => response.json())
+      .then((responseJson) => {
 
-              this.setState({
-                         text:responseJson.text,
-                         author:responseJson.author
-                   });
+        this.setState({
+          text: responseJson.text,
+          author: responseJson.author
+        });
 
-            //return responseJson.tex;
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        //return responseJson.tex;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
   }
 
-  render () {
+  render() {
     return (
       <View style={styles.mainContainer} testID='launchScreen'>
-        <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
+        <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch'/>
         <ScrollView style={styles.container}>
-          <View style={styles.section} >
-            <Text style={styles.sectionText}>
-              Citat: {this.state.text}
+          <View style={styles.section}>
+            <Text style={styles.sectionTextA}>
+              {this.state.text}
             </Text>
-
             <Text style={styles.sectionText}>
-              Autor: {this.state.author}
+              {this.state.author}
             </Text>
           </View>
 

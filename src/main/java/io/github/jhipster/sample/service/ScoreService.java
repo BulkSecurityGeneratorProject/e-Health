@@ -22,12 +22,12 @@ public class ScoreService {
     @Autowired
     private ScoreMapper scoreMapper;
 
-    public ScoreDTO retrieveLastScore(User user){
+    public ScoreDTO retrieveLastScore(User user) {
         return scoreMapper.mapScoreDTOFromScore(user.getScores().stream().max(Comparator.comparing(Score::getCreatedDate))
             .orElseThrow(NoSuchElementException::new));
     }
 
-    public List<ScoreDTO> retrieveAllScores(User user){
+    public List<ScoreDTO> retrieveAllScores(User user) {
         List<ScoreDTO> scoreDTOS = new ArrayList<>();
         user.getScores().forEach(score -> {
             scoreDTOS.add(scoreMapper.mapScoreDTOFromScore(score));
@@ -36,13 +36,7 @@ public class ScoreService {
         return scoreDTOS;
     }
 
-    public boolean saveQuestionScore(User user, QuestionScorePostDTO questionScorePostDTO) {
-        try {
-            scoreRepository.save(scoreMapper.mapScoreFromUserAndDto(user, questionScorePostDTO));
-        }catch (Exception e){
-            return false;
-        }
-
-        return true;
+    public void saveQuestionScore(User user, QuestionScorePostDTO questionScorePostDTO) {
+        scoreRepository.save(scoreMapper.mapScoreFromUserAndDto(user, questionScorePostDTO));
     }
 }
