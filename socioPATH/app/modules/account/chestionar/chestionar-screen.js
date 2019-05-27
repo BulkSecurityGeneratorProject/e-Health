@@ -36,7 +36,7 @@ class ChestionarScreen extends React.Component {
 
   sendDataToServer(scorFrica, scorEzitare) {
 
-    fetch('http://192.168.0.186:8080/score/postScore', {
+    fetch('http://192.168.0.111:8080/score/postScore', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -87,7 +87,7 @@ class ChestionarScreen extends React.Component {
 
 
   componentDidMount() {
-    fetch('http://192.168.0.186:8080/question/getAllQuestions')
+    fetch('http://192.168.0.111:8080/question/getAllQuestions')
       .then((response) => response.json())
       .then((responseJson) => {
 

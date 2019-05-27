@@ -102,9 +102,11 @@ public class AccountResource {
     @GetMapping("/account")
     @Timed
     public UserDTO getAccount() {
-        return userService.getUserWithAuthorities()
+       UserDTO dto =  userService.getUserWithAuthorities()
             .map(UserDTO::new)
             .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+       dto.setScore(userService.updateUserScore(userService.getUserWithAuthorities().get()));
+       return dto;
     }
 
     /**

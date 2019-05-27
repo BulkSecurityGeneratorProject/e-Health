@@ -43,7 +43,7 @@ export default class LaunchScreen extends React.Component {
   }
 
   componentWillMount() {
-    fetch('http://192.168.0.186:8080/quote/getRandomQuote')
+    fetch('http://192.168.0.111:8080/quote/getRandomQuote')
       .then((response) => response.json())
       .then((responseJson) => {
 

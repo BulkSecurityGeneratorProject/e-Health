@@ -29,11 +29,17 @@ public class ScoreService {
 
     public List<ScoreDTO> retrieveAllScores(User user) {
         List<ScoreDTO> scoreDTOS = new ArrayList<>();
-        user.getScores().forEach(score -> {
+
+        retrieveAll(user).forEach(score -> {
             scoreDTOS.add(scoreMapper.mapScoreDTOFromScore(score));
         });
 
         return scoreDTOS;
+    }
+
+    public List<Score> retrieveAll(User user) {
+
+        return scoreRepository.findAllByUserId(user);
     }
 
     public void saveQuestionScore(User user, QuestionScorePostDTO questionScorePostDTO) {

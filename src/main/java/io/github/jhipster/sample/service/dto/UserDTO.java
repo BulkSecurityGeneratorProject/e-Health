@@ -84,8 +84,6 @@ public class UserDTO {
             .collect(Collectors.toSet());
         this.sex = user.getSex();
         this.age = user.getAge();
-        this.score = user.getScores().stream().max(Comparator.comparing(Score::getCreatedDate))
-            .orElseThrow(NoSuchElementException::new).getScore();
     }
 
     public Long getId() {

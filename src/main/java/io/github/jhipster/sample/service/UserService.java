@@ -1,6 +1,7 @@
 package io.github.jhipster.sample.service;
 
 import io.github.jhipster.sample.domain.Authority;
+import io.github.jhipster.sample.domain.Score;
 import io.github.jhipster.sample.domain.User;
 import io.github.jhipster.sample.repository.AuthorityRepository;
 import io.github.jhipster.sample.config.Constants;
@@ -13,6 +14,7 @@ import io.github.jhipster.sample.web.rest.vm.ManagedUserVM;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +47,9 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
+    @Autowired
+    private ScoreService scoreService;
+
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -63,6 +68,12 @@ public class UserService {
                 log.debug("Activated user: {}", user);
                 return user;
             });
+    }
+
+    public Long updateUserScore(User user){
+        cacheManager.getCache(USERS_CACHE).evict(user.getLogin());
+       return scoreService.retrieveAll(user).stream().max(Comparator.comparing(Score::getCreatedDate))
+            .orElseThrow(NoSuchElementException::new).getScore();
     }
 
     public Optional<User> completePasswordReset(String newPassword, String key) {
@@ -153,7 +164,7 @@ public class UserService {
      * @param imageUrl image URL of user
      */
     public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl, String sex, Long age) {
-        SecurityUtils.getCurrentUserLogin()
+            SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
             .ifPresent(user -> {
                 user.setFirstName(firstName);

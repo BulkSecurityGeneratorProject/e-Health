@@ -103,7 +103,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @OneToMany(mappedBy = "userId", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<Score> scores = new HashSet<>();
+    private Set<Score> scores;
 
 
     public Long getId() {
