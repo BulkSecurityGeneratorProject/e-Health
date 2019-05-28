@@ -52,14 +52,15 @@ export const appStack = {
               options: {
                 topBar: {
                   title: {
-                    text: 'Welcome!',
+                    text: 'SocioPATH',
                     color: Colors.snow
                   },
                   leftButtons: [
                     {
                       id: 'menuButton',
                       icon: Images.menuIcon,
-                      testID: 'menuButton'
+                      testID: 'menuButton',
+                      color: Colors.snow
                     }
                   ]
                 }
