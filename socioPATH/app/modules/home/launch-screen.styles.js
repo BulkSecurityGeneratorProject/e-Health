@@ -10,10 +10,9 @@ export default StyleSheet.create({
     backgroundColor: Colors.transparent
   },
   logo: {
-    marginTop: Metrics.doubleSection,
-    height: Metrics.images.logo,
-    width: Metrics.images.logo,
-    resizeMode: 'contain'
+    alignSelf: 'center',
+    height: 200,
+    width: 200
   },
   centered: {
     alignItems: 'center'

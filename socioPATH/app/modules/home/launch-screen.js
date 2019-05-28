@@ -66,6 +66,7 @@ export default class LaunchScreen extends React.Component {
         <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch'/>
         <ScrollView style={styles.container}>
           <View style={styles.section}>
+            <Image source={Images.creativeLogo} style={styles.logo} resizeMode='stretch'/>
             <Text style={styles.sectionTextA}>
               {this.state.text}
             </Text>
