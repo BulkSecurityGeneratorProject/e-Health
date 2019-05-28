@@ -22,11 +22,13 @@ public class ChallengeController {
     @Autowired
     private ChallengeService challengeService;
 
-    @GetMapping(value = "/{target}")
-    public ResponseEntity<ChallengeDTO> getRandomQuote(@PathVariable("target") String target) {
+    @GetMapping(value = "/getChallengeForTarget/{target}")
+    public ResponseEntity<ChallengeDTO> getChallengeForTarget(@PathVariable("target") String target) {
 
-        log.debug("Retrieve a challange for target " + target);
-        return new ResponseEntity<>(challengeService.retrieveRandomChallengeOfTarget(target),
+        log.debug("Retrieve a challenge for target " + target);
+        return new ResponseEntity<>(challengeService.
+            retrieveRandomChallengeOfTarget(target),
             HttpStatus.OK);
     }
+
 }
