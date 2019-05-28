@@ -1,5 +1,7 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
+import { AsyncStorage } from 'react-native'
+
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
@@ -30,10 +32,11 @@ export const INITIAL_STATE = Immutable({
 export const request = (state) => state.merge({ fetching: true })
 
 // we've successfully logged in
-export const success = (state, data) => {
-  const { authToken } = data
+export const success = async (state, data) => {
+  const { authToken } = data;
+  await AsyncStorage.setItem('jwtToken', authToken);
   return state.merge({ fetching: false, error: null, authToken })
-}
+};
 
 // we've had a problem logging in
 export const failure = (state, { error }) => state.merge({ fetching: false, error, authToken: null })

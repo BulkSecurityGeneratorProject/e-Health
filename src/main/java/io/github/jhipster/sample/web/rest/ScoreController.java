@@ -6,7 +6,7 @@ import io.github.jhipster.sample.security.SecurityUtils;
 import io.github.jhipster.sample.service.ScoreService;
 import io.github.jhipster.sample.service.dto.QuestionScorePostDTO;
 import io.github.jhipster.sample.service.dto.ScoreDTO;
-import io.github.jhipster.sample.service.dto.UserDTO;
+import io.github.jhipster.sample.web.rest.errors.EmailAlreadyUsedException;
 import io.github.jhipster.sample.web.rest.errors.InternalServerErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -33,7 +33,6 @@ public class ScoreController {
     @GetMapping("/getLastScore")
     public ResponseEntity<ScoreDTO> getLastScore() {
         final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
-
         Optional<User> user = userRepository.findOneByLogin(userLogin);
         if (!user.isPresent()) {
             throw new InternalServerErrorException("User could not be found");
@@ -61,7 +60,9 @@ public class ScoreController {
     @PostMapping("/postScore")
     public void postScore(@RequestBody QuestionScorePostDTO questionScorePostDTO) {
 
-        Optional<User> user = userRepository.findOneByLogin("admin");
+        final String userLogin = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
+
+        Optional<User> user = userRepository.findOneByLogin(userLogin);
         if (!user.isPresent()) {
             throw new InternalServerErrorException("User could not be found");
         }

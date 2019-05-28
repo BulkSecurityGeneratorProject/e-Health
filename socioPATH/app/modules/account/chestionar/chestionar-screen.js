@@ -34,17 +34,17 @@ class ChestionarScreen extends React.Component {
 
   }
 
-  sendDataToServer(scorFrica, scorEzitare) {
-
+  async sendDataToServer(scorFrica, scorEzitare) {
     fetch('http://192.168.0.111:8080/score/postScore', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + await AsyncStorage.getItem('jwtToken', null)
       },
       body: JSON.stringify({
         scor_frica: scorFrica,
-        scor_ezitare: scorEzitare,
+        scor_ezitare: scorEzitare
       }),
     });
 
@@ -82,12 +82,7 @@ class ChestionarScreen extends React.Component {
   };
 
   componentDidMount() {
-    fetch('http://192.168.0.111:8080/question/getAllQuestions',  {
-      method:"GET",
-        headers: {
-        "Authorization": getToken()
-      }
-    })
+    fetch('http://192.168.0.111:8080/question/getAllQuestions')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -135,18 +130,6 @@ class ChestionarScreen extends React.Component {
     )
   }
 }
-
-const getToken = async () => {
-  let token = '';
-  try {
-    token = await AsyncStorage.getItem('username') || 'none';
-  } catch (error) {
-    // Error retrieving data
-    console.log(error.message);
-  }
-  console.log(token);
-  return token;
-};
 
 const mapStateToProps = (state) => {
   return {
