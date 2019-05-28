@@ -1,12 +1,12 @@
 import React from 'react'
-import {ScrollView, Text, Picker, View} from 'react-native'
+import {ScrollView, Text, Picker, View, AsyncStorage} from 'react-native'
 import {connect} from 'react-redux'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 import {Navigation} from 'react-native-navigation'
 import t from 'tcomb-form-native'
 import styles from './chestionar-screen.styles'
 import {Button} from 'react-native';
-import {  settingsScreen } from '../../../navigation/layouts'
+import { settingsScreen } from '../../../navigation/layouts';
 
 import ChestionarSendActions from '../chestionar/chestionar.reducer'
 
@@ -16,7 +16,7 @@ let Form = t.form.Form
 class ChestionarScreen extends React.Component {
   constructor(props) {
     super(props)
-    Navigation.events().bindComponent(this)
+    Navigation.events().bindComponent(this);
     this.state = {
       scor_ezitare: 0,
       ezitare: 0,
@@ -27,7 +27,7 @@ class ChestionarScreen extends React.Component {
       valueSelected: '',
       frica: 0,
       questions: []
-    }
+    };
 
     this.nextQuestion = this.nextQuestion.bind(this)
     this.sendDataToServer = this.sendDataToServer.bind(this)
@@ -40,13 +40,11 @@ class ChestionarScreen extends React.Component {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
-
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         scor_frica: scorFrica,
         scor_ezitare: scorEzitare,
-
       }),
     });
 
@@ -55,14 +53,12 @@ class ChestionarScreen extends React.Component {
 
   nextQuestion(index) {
 
-    if (index == this.state.questions.length) {
-      this.setState({
-        currentQuestion: 'Multumim pentru timpul accordat! Te rugam sa accesezi pagina de Profil pentru a-ti urmari evolutia'
-      });
+    if (index === this.state.questions.length) {
       this.sendDataToServer(this.state.scor_frica, this.state.scor_frica);
+      settingsScreen();
     }
 
-    var newIndex = index + 1;
+    let newIndex = index + 1;
     this.setState({
       currentQuestion: this.state.questions[index],
       currentIndex: newIndex,
@@ -85,9 +81,13 @@ class ChestionarScreen extends React.Component {
     })
   };
 
-
   componentDidMount() {
-    fetch('http://192.168.0.111:8080/question/getAllQuestions')
+    fetch('http://192.168.0.111:8080/question/getAllQuestions',  {
+      method:"GET",
+        headers: {
+        "Authorization": getToken()
+      }
+    })
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -105,7 +105,6 @@ class ChestionarScreen extends React.Component {
 
 
   render() {
-
 
     return (
       <KeyboardAwareScrollView>
@@ -137,12 +136,24 @@ class ChestionarScreen extends React.Component {
   }
 }
 
+const getToken = async () => {
+  let token = '';
+  try {
+    token = await AsyncStorage.getItem('username') || 'none';
+  } catch (error) {
+    // Error retrieving data
+    console.log(error.message);
+  }
+  console.log(token);
+  return token;
+};
+
 const mapStateToProps = (state) => {
   return {
     // fetching: state.chestionar.fetching,
     // error: state.chestionar.error
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
