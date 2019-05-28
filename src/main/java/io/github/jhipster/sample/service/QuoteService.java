@@ -20,7 +20,7 @@ public class QuoteService {
 
     public QuoteDTO retrieveRandomQuote(){
         List<Quote> quoteList = quoteRepository.findAll();
-        int value = ThreadLocalRandom.current().nextInt(0, quoteList.size() - 1);
+        int value = ThreadLocalRandom.current().nextInt(0, quoteList.size() );
         return quoteMapper.retrieveQuoteDTOFromQuote(quoteList.get(value));
     }
 

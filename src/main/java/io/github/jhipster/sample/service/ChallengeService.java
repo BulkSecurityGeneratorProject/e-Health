@@ -27,7 +27,7 @@ public class ChallengeService {
                 challengesForTarget.add(challenge);
         });
 
-        int value = ThreadLocalRandom.current().nextInt(0, challengesForTarget.size() - 1);
+        int value = ThreadLocalRandom.current().nextInt(0, challengesForTarget.size());
         return challengeMapper.retriveChallangeDTOFromChallange(challengesForTarget.get(value));
     }
 
