@@ -35,7 +35,7 @@ const ApplicationStyles = {
       textAlign: 'center'
     },
     sectionTextA: {
-      ...Fonts.style.h2,
+      ...Fonts.style.h3,
       paddingVertical: 50,
       color: Colors.snow,
       marginVertical: Metrics.smallMargin,
