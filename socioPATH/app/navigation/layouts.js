@@ -15,6 +15,7 @@ import DrawerContent from './drawer/drawer-content'
 import SettingsScreen from '../modules/account/settings/settings-screen'
 import ChestionarScreen from '../modules/account/chestionar/chestionar-screen'
 import ObiectiveScreen from '../modules/account/obiective/obiective-screen'
+import ChallengeScreen from '../modules/account/challenge/challenge-screen'
 import RegisterScreen from '../modules/account/register/register-screen'
 import ForgotPasswordScreen from '../modules/account/password-reset/forgot-password-screen'
 import ChangePasswordScreen from '../modules/account/password/change-password-screen'
@@ -24,6 +25,7 @@ import EntitiesScreen from '../modules/entities/entities-screen'
 export const LOGIN_SCREEN = 'nav.LoginScreen'
 export const REGISTER_SCREEN = 'nav.RegisterScreen'
 export const OBIECTIVE_SCREEN = 'nav.ObiectiveScreen'
+export const CHALLENGE_SCREEN = 'nav.ChallengeScreen'
 export const FORGOT_PASSWORD_SCREEN = 'nav.ForgotPasswordScreen'
 export const CHANGE_PASSWORD_SCREEN = 'nav.ChangePasswordScreen'
 export const SETTINGS_SCREEN = 'nav.SettingsScreen'
@@ -110,6 +112,7 @@ export function registerScreensAndStartApp () {
   Navigation.registerComponentWithRedux(LOGIN_SCREEN, () => LoginScreen, Provider, store)
   Navigation.registerComponentWithRedux(OBIECTIVE_SCREEN, () => ObiectiveScreen, Provider, store)
   Navigation.registerComponentWithRedux(CHESTIONAR_SCREEN, () => ChestionarScreen, Provider, store)
+  Navigation.registerComponentWithRedux(CHALLENGE_SCREEN, () => ChallengeScreen, Provider, store)
   Navigation.registerComponentWithRedux(REGISTER_SCREEN, () => RegisterScreen, Provider, store)
   Navigation.registerComponentWithRedux(FORGOT_PASSWORD_SCREEN, () => ForgotPasswordScreen, Provider, store)
   Navigation.registerComponentWithRedux(CHANGE_PASSWORD_SCREEN, () => ChangePasswordScreen, Provider, store)
@@ -193,6 +196,23 @@ export const obiectiveScreen = () => Navigation.push('center', {
           color: Colors.snow
         }
       }
+    }
+  }
+})
+
+export const challengeScreen = (goal) => Navigation.push('center', {
+  component: {
+    name: CHALLENGE_SCREEN,
+    options: {
+      topBar: {
+        title: {
+          text: 'Provocare',
+          color: Colors.snow
+        }
+      }
+    },
+    passProps: {
+      target: goal
     }
   }
 })

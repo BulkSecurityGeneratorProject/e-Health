@@ -1,14 +1,11 @@
-import React from 'react'
-import { Alert, View, Text, TouchableHighlight, FlatList, Image } from 'react-native'
-import { connect } from 'react-redux'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { Navigation } from 'react-native-navigation'
-import t from 'tcomb-form-native'
-import styles from './obiective-screen.styles'
-import {Images} from '../../../shared/themes'
-
-//import ObiectiveSendActions from '../obiective/obiective.reducer'
-
+import React from 'react';
+import { FlatList, Image, Text, View } from 'react-native';
+import { Navigation } from 'react-native-navigation';
+import { connect } from 'react-redux';
+import t from 'tcomb-form-native';
+import { challengeScreen } from '../../../navigation/layouts';
+import { Images } from '../../../shared/themes';
+import styles from './obiective-screen.styles';
 
 let Form = t.form.Form
 
@@ -26,8 +23,8 @@ class ObiectiveScreen extends React.Component {
     };
   }
 
-  actionSelectGoal(item) {
-    Alert.alert(item);
+  actionSelectGoal(target) {
+    challengeScreen(target);
   }
 
   render() {
